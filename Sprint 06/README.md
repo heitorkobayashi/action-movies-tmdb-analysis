@@ -1,61 +1,84 @@
-# **Instruções**
+# **Sprint 6: Desafio**
 
-A sexta sprint teve como objetivo o aprofundamento em AWS e algumas ferramentas como Glue, EMR, Redshift e QuickSight, além da pratica de laboratórios em Lambda e Athena.
+## **1. Objetivos**
 
-# **Certificados**
+Este desafio teve como objetivo a ingestão de arquivos CSV em um Bucket no `S3`. Essa é a primeira etapa do Desafio Final.
 
-Acesse os certificados e badges através do seguinte link: **[Certificados](/Sprint%206/certificados/)**. Abaixo, clique nos links e acesse diretamente os certificados.
+Para isso, foi necessário construir um código Python que foi executado dentro de um conteiner Docker para carregar os dados locais dos arquivos `series.csv` e `movies.csv` para o bucket.
 
-[AWS Skill Builder - Fundamentals of Analytics on AWS – Part 1](/Sprint%206/certificados/19345_5_6213735_1730401897_AWS%20Skill%20Builder%20Course%20Completion%20Certificate.pdf)
+Clique nos seguintes links para acessar os respectivos códigos e arquivos:
 
-[AWS Skill Builder -  Fundamentals of Analytics on AWS – Part 2](/Sprint%206/certificados/19359_5_6213735_1731115768_AWS%20Skill%20Builder%20Course%20Completion%20Certificate.pdf)
+- [Script Python](/Sprint%206/desafio/entrega_1/desafio_sprint06_script.py)
+- [Dockerfile](/Sprint%206/desafio/entrega_1/Dockerfile)
 
-[AWS Skill Builder - Introduction to Amazon Athena ](/Sprint%206/certificados/5838_3_6213735_1731115351_AWS%20Course%20Completion%20Certificate.pdf)
-
-[AWS Skill Builder - Serverless Analytics](/Sprint%206/certificados/6256_3_6213735_1731115418_AWS%20Course%20Completion%20Certificate.pdf)
-
-[AWS Skill Builder - Best Practices for Data Warehousing with Amazon Redshift](/Sprint%206/certificados/6339_3_6213735_1731114970_AWS%20Course%20Completion%20Certificate.pdf)
-
-[AWS Skill Builder - AWS Glue Getting Started](/Sprint%206/certificados/8171_3_6213735_1731115286_AWS%20Course%20Completion%20Certificate.pdf)
-
-[AWS Skill Builder - Amazon EMR Getting Started](/Sprint%206/certificados/8827_5_6213735_1731115188_AWS%20Skill%20Builder%20Course%20Completion%20Certificate.pdf)
-
-[AWS Skill Builder - Amazon QuickSight - Getting Started](/Sprint%206/certificados/14908_3_6213735_1731114890_AWS%20Course%20Completion%20Certificate.pdf)
-
-[Getting Started with Amazon Redshift](/Sprint%206/certificados/16151_3_6213735_1731115098_AWS%20Course%20Completion%20Certificate.pdf)
-
-# **Exercícios**
-
-Acesse as evidências dos exercícios através do seguinte link: **[Evidências dos exercícios](/Sprint%206/exercicios/evidencias/)**
+Obs.: Os arquivos `series.csv` e `movies.csv` não se encontram no repositório pois eles são muito pesados e estava dando erro ao commitá-los.
 
 
-Nesta sprint foram realizado três laboratórios: 
+## **2. Definição de Tema**
 
-- Lab AWS S3
-- Lab AWS Athena
-- Lab AWS Lambda
+Antes de iniciar o desenvolvimento do desafio, foi solicitado a realização de uma questão que é a elaboração do tema da análise do desafio final. 
 
-Abaixo, seguem algumas evidencias dos exercícios:
+O meu desafio abordará a **análise da relação entre orçamento e qualidade em filmes de ação**.
 
-**Lab AWS S3**:
+Esta análise pretende explorar em como o orçamento impacta a qualidade percebida dos filmes de ação, comparando produções de alto e baixo orçamento.
 
-![S3](/Sprint%206/exercicios/evidencias/02_lab_s3_edit_hosting.png)
+Com base em uma experiência prévia no audiovisual e no cinema brasileiro, tive a oportunidade de participar de diversos projetos de baixo a médio orçamento obtendo resultados positivos por parte da crítica. Muitas vezes, diversos filmes fora do eixo hollywoodiano lidam com restrições financeiras e dificuldades de produção, dessa forma, pretendo observar e responder perguntas como:
 
-**Lab AWS Athena**:
+- Filmes de alto orçamento são realmente melhores avaliados?
+- Como filmes com orçamento reduzido, mas bem avaliados, conseguem obter boas avaliações com recursos escassos?
+- O que as produções de baixo orçamento podem conquistar em comparação com produções de grande orçamento?
 
-![Athena](/Sprint%206/exercicios/evidencias/06_lab_athena_exercicio_query.png)
+A maior motivação é entender como filmes de ação de menor orçamento podem competir com grandes produções, que muitas vezes possuem recursos em alta quantidade e obtem resultados negativos. 
 
-**Lab AWS Lambda**:
+## **3. Desenvolvimento**
 
-![Lambda](/Sprint%206/exercicios/evidencias/01_lab_lambda_teste.png)
+### **3.1. Criação do bucket**
 
-**Limpeza dos recursos**:
+Para começar o desafio, o primeiro passo foi a criação do bucket, como podemos ver nas imagens a seguir:
 
-![Limpeza](/Sprint%206/exercicios/evidencias/lab_limpeza_de_recursos.png)
+![imagem_criacaobucket](/Sprint%206/evidencias/01_desafio_criacao_bucket.png)
 
+### **3.2. Criação do script Python**
 
-# **Desafio**
+Agora com o bucket criado, podemos passar para o próximo passo, a criação do Script. 
 
-Acesse o desafio através do seguinte link: **[Desafio da Sprint](/Sprint%206/desafio/README.md)**
+Na imagem abaixo podemos ver:
 
-Acesse as evidências do desafio através do seguinte link: **[Evidências do desafio](/Sprint%206/evidencias/)**
+![imagem_script1](/Sprint%206/evidencias/05_desafio_script_01.png)
+
+- Importação da biblioteca `boto3` e `datetime`
+- Configuração do Bucket no S3 que tem a função de estruturar os caminhos dos arquivos.
+- Definição do caminho local dos arquivos CSV.
+- Criação de um dicionário `categoria_paths` para definir os subdiretórios no bucket e organizar os arquivos de acordo com a categoria.
+
+Em seguida, temos: 
+
+![imagem_script2](/Sprint%206/evidencias/06_desafio_script_02.png)
+
+- A variável `hoje` utiliza a data atual para criar a estrutura de caminho solicitada no desafio, com o ano, mês e dia em que é realizado o upload. 
+- As credenciais da AWS foram armazenadas em variáveis. Infelizmente obtive problemas de credencial na etapa do Docker, então optei pela utilização das credenciais no próprio código. 
+
+Por fim:
+
+![imagem_script3](/Sprint%206/evidencias/07_desafio_script_03.png)
+
+- Definição de duas funções:
+
+    - A função `upload_arquivos` recebe o caminho de arquivo local e o caminho de destino no S3, e então realiza o upload dos arquivos no bucket. Ela contém também uma mensagem de sucesso e de erro caso o upload falhe. 
+    - A segunda função `main` ela cria o cliente S3 e constrói o caminho de destino com a estrutura solicitada, utilizando as variáveis definidas anteriormente. Por fim, chama a função anterior para fazer o upload de cada arquivo no caminho correto.
+- Execução do script chamando a função `main` diretamente.
+
+### **3.3. Criação do Dockerfile e execução do script**
+
+Tendo o script finalizado, bastava a criação do Dockerfile e fazer a execução do container, como podemos ver na imagem abaixo. Você pode conferir o Dockerfile no link descrito na primeira seção deste readme.
+
+![imagem_docker](/Sprint%206/evidencias/04_desafio_terminal_docker.png)
+
+- Além da utilização das credenciais, foi utilizado a flag -v para fazer o mapeamento dos arquivos localmente e indicar o local em que o conteiner irá acessar os arquivos e onde montará esses arquivos.
+
+### **3.4. Upload no bucket**
+
+Com o upload tendo sucesso, podemos visualizar os arquivos nos caminhos definidos lá no bucket do S3, finalizando a primeira etada do desafio final:
+
+![imagem_bucket_movies](/Sprint%206/evidencias/02_desafio_upload_movies.png)
+![imagem_bucket_series](/Sprint%206/evidencias/03_desafio_upload_series.png)

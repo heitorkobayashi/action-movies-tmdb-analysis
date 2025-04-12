@@ -1,90 +1,108 @@
-# **Instruções**
+# **Sprint 7: Desafio**
 
-A sétima sprint teve como objetivo o aprofundamento em PySpark, utilização de APIs e exercitar conceitos de Glue e Lambda.
+## **1. Objetivos**
 
-# **Certificados**
+Este desafio teve como objetivo a obtenção dos dados do TMDB via AWS Lambda, realizando chamadas da API. Esses dados coletados foram upados dentro do S3, no mesmo bucket da etapa anterior. Nesse caso, os arquivos eram JSON. 
 
-Essa sprint não teve cursos fora da Udemy.
+Dessa forma, nessa etapa deveríamos complementar os dados dos Filmes e Series carregados anteriormente.
 
-# **Exercícios**
+Clique nos seguintes links para acessar os respectivos códigos e arquivos:
 
-#### Acesse as evidências dos exercícios através do seguinte link: **[Evidências dos exercícios](../Sprint%207/exercicios/evidencias/)**
-
-
-Nesta sprint foram realizado três laboratórios, acesse as pastas respectivas clicando nos links abaixo: 
-
-- **[Exercício TMDB:](../Sprint%207/exercicios/tmdb/)** Processo de extração de dados da API do TMDB
-- **[Exercício Apache Spark:](../Sprint%207/exercicios/pyspark/)** Contador de Palavras
-- **[Lab AWS Glue:](../Sprint%207/exercicios/lab_glue/)** Processo de ETL utilizando AWS Glue
-
-Abaixo, seguem algumas evidencias dos exercícios:
-
-**Exercício TMDB**:
-
-Este exercício consistia em criar um processo de extração de dados da API do TMDB. Para isso foi necessário criar uma conta no portal do TMDB para solicitar as chaves de acesso do uso da API.
-
-Acesse o código clicando aqui: [Código TMDB](../Sprint%207/exercicios/tmdb/tmdb_teste.ipynb)
-
-![tmdb](../Sprint%207/exercicios/evidencias/01_tmdb_teste.png)
-
-- Acima, a imagem mostra o exemplo de código em Python para solicitação da API.
-
-**Exercício Apache Spark**:
-
-Neste exercício foi desenvolvido um processamento com Spark, por meio de um container Docker, um código capaz de contar a quantidade de ocorrências de cada palavra no arquivo README.md do repositório aqui do GitHub.
-
-Acesse o código clicando aqui: [Código Spark](../Sprint%207/exercicios/pyspark/script_spark.py)
-
-Na imagem abaixo podemos ver a imagem do `jupyter/all-spark-notebook` construida.
-
-![spark_imagem](../Sprint%207/exercicios/evidencias/01_spark_imagem.png)
-
-Após realizado o mapeamento da porta do serviço parara uma porta local da máquina, podemos ver o código em execução através do navegador.
-
-![spark_execucao](../Sprint%207/exercicios/evidencias/04_spark_contador_palavras.png)
+- [Script Python - Função Lambda](../desafio/entrega_2/lambda_function.py)
+- [Arquivos JSON](../desafio/entrega_2/dados_tmdb)
 
 
-**Lab AWS Glue**:
+## **2. Definição de Tema - Perguntas a serem respondidas**
 
-Neste laboratório foi realizado a construção de um processo de ETL utilizando AWS Glue. 
+Agora com acesso às APIs foi possível visualizar certos dados que não tínhamos acesso anteriomente. O meu desafio abordará a **Análise da Relação entre Orçamento e Qualidade em Filmes de Ação da década de 2000 a 2010**. Dessa forma, as perguntas motivadoras a serem respondidas na minha pesquisa são:
 
-Acesse o código clicando aqui: [Código Glue](../Sprint%207/exercicios/lab_glue/lab_glue.ipynb)
+- O orçamento de produção está diretamente relacionado às notas de avaliação dos filmes de ação?
 
-Acesse o arquivo .CSV, resultado do Athena, clicando aqui: [Arquivo CSV](../Sprint%207/exercicios/lab_glue/crawler_athena.csv)
+- Filmes de baixo orçamento podem alcançar qualidade semelhante a filmes de alto orçamento?
 
-Esse exercício foi separado em x etapas:
+Tendo em vista que a década de 2000 a 2010 foi um perído de transição no cinema, muito marcado pela popularização do uso de tecnologias como CGI e das expansões de certas franquias, podemos nos atentar a algumas questões, como:
 
-- 1. Preparação dos dados de origem
-- 2. Criação da IAM Role para os jobs do AWS Glue
-- 3. Configuração da conta para utilizar o Glue
-- 4. Configuração de permisões no AWS Lake Formation
-- 5. Criação de um novo Job no Glue: exercícios
-- 6. Criação do crawler
+- Filmes com orçamento elevado tiveram maior sucesso comercial entre 2000 e 2010?
 
-Abaixo, seguem algumas evidencias da realização deste lab:
+- Existe uma correlação entre o orçamento de um filme de ação e sua nota média durante o período?
 
-![pasta_labglue](../Sprint%207/exercicios/evidencias/02_glue_pasta_labglue.png)
+- O surgimento de tecnologias, como CIG, na década de 2000 impactou a relação entre orçamento e qualidade dos filmes de ação?
 
-- Pasta `lab-glue`
+- Como os filmes de ação da década de 2000 a 2010 se diferem em termos de orçamento e qualidade em comparação a décadas anteriores ou posteriores?
 
-![frequencia_labglue](../Sprint%207/exercicios/evidencias/03_glue_pasta_frequencia_01.png)
+## **3. Desenvolvimento**
 
-- Pasta `frequencia_registro_nomes_eua`, após realização do job.
+### **3.1. Passo a passo**
 
-![glue_schemas](../Sprint%207/exercicios/evidencias/06_glue_schemas.png)
+Para começar o desafio, o primeiro passo foi a criação da função no Lambda, como podemos ver na imagem a seguir:
 
-- Log do schema solicitado
+![imagem_criacao_funcao](../evidencias/01_desafio_criacao_funcao_lambda.png)
 
-![glue_logs](../Sprint%207/exercicios/evidencias/07_glue_logs_registros.png)
+Com as perguntas definidas, foi possível priorizar quais APIs do TMDB seriam importantes para a ingestão de dados. Nessa sprint utilizei 3 urls, sendo elas:
 
-- Log dos jobs solicitados
+- `https://api.themoviedb.org/3/discover/movie`
+- `https://api.themoviedb.org/3/movie/top_rated`
+- `https://api.themoviedb.org/3/movie/popular`
 
-![glue_crawler_athena](../Sprint%207/exercicios/evidencias/09_glue_crawler_athena.png)
+Ainda faltam algumas URLS a serem utilizadas, principalmente para extrair alguns dados de orçamento. Infelizmente, não tive tempo de separar esses dados durante essa sprint. De qualquer forma, a base de dados acredito que esteja bem completa. 
 
-- Query final no Athena
+![imagem_funcao](../evidencias/02_desafio_funcao.png)
 
-# **Desafio**
+- Acima, imagem do código realizado.
 
-Acesse o desafio através do seguinte link: **[Desafio da Sprint](../Sprint%207/desafio/README.md)**
+Para dar continuidade no desafio, foi necessário resolver algumas questões de permissão, como podemos ver na imagem abaixo:
 
-Acesse as evidências do desafio através do seguinte link: **[Evidências do desafio](../Sprint%207/evidencias/)**
+![imagem_permissões](../evidencias/03_desafio_permissoes.png)
+
+- Permissão de acesso total ao S3 sendo concedida ao Lambda
+
+Nas imagens a seguir, temos a evidencia do código em execução, subindo os arquivos no caminho solicitado:
+
+![imagem_sucesso](../evidencias/04_desafio_successo.png)
+
+![imagem_diretorio](../evidencias/05_desafio_folder.png)
+
+- Resultado do código executado: criação da pasta TMDB.
+
+![imagem_jsons](../evidencias/06_desafio_jsons.png)
+
+- Resultado do código executado: arquivos JSON gerados dentro do path solicitado.
+
+### **3.2. O código**
+
+Nessa seção iremos destrichar a função e explicar o código em si. Acesse o scripit no link abaixo:
+
+[Script Python - Função Lambda](../desafio/entrega_2/lambda_function.py)
+
+Primeiramente, foi necessário fazer a importação de bibliotecas como `json`, `boto3`, `datetime`, `urllib.request` e `urllib.parse`. Infelizmente o Lambda não trabalha com a biblioteca `requests`, então a utilização da URLLIB se deu por isso. Claro que era possível criar uma layer e assim subir a biblioteca no Lambda, mas depois de um tempo de pesquisa preferi procurar uma outra forma de fazer esses requests por pura curiosidade.
+
+![imagem_funcao](../evidencias/02_desafio_funcao.png)
+
+Como é possível ver na imagem, eu acabei aproveitando muito do corpo do código da última sprint, a estrutura era bem similar. Então na parte de configuração do bucket foi adicionado apenas a variável `file_type`, pensando no path final. 
+
+A função `upload_para_s3` também é bem similar a anterior. Ela é a função responsável por envolver o processo de envio dos dados processados para o bucket do S3. Aqui é importante ressaltar a montagem do caminho `path` baseado no parâmetro solicitado, incluindo a data. O envio para o S3 converte os dados JSON em string antes do envio. Nessa função, continuei utilizando o tratamento de erros, para exibir mensagens caso houvesse falhas (as quais me deparei algumas vezes).
+
+### **3.3. Função Lambda**
+
+Na imagem abaixo, podemos ver a função:
+
+![imagem_funcao_lambda_1](../evidencias/07_desafio_funcao_lambda_1.png)
+
+A função `lambda_handler` é o ponto de entrada da função Lambda. Basicamente, ela é dividida em 4 partes:
+
+- **1. Configuração da API TMDB:** Aqui é utilizada a chave de autenticação para acessar as APIs do TMDB. Cada API contém uma URL base, o seus parâmetros e filtros. Elas foram definidas 3 APIs para serem processadas:
+    - filmes_acao: Filmes de ação mais populares.
+    - filmes_mais_avaliados: Filmes mais bem avaliados de ação.
+    - filmes_populares: Filmes populares de ação.
+
+- **2. Processamento das APIs:** Nessa parte é onde ocorre a iteração em cada API, utilizando os parâmetros da `urllib.parse.urlencode` e fazendo a requisição usando `urllib.request.urlopen`. Dessa forma, o código lê e decodifica os dados retornados no formato JSON.
+
+![imagem_funcao_lambda_2](../evidencias/08_desafio_funcao_lambda_2.png)
+
+- **3. Envio ao S3:** Após obter os dados de cada API, invoca a função `upload_para_s3` para enviar os dados processados ao bucket S3.
+
+- **4. Retorno final:** Após processar todas as APIs, retorna uma mensagem indicando o sucesso.
+
+### **3.4 Considerações finais do código**
+
+Por fim, este código automatizava a coleta de dados de diferentes APIs do TMDB e organizou essas informações no S3. Ele realizou requisições para obter dados sobre filmes, formatando os resultados em JSON, armazenando em pastas baseada na data do processamento. O uso do AWS Lambda, por mais complicado que tenha sido, principalmente na questão da definição da função `lambda_handler`, garantiu a automatização e tornou o processo eficiente.
