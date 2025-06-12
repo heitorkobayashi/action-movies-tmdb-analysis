@@ -1,10 +1,8 @@
-# **Sprint 6: Desafio**
+# **Sprint 01: Descrição das etapas**
 
 ## **1. Objetivos**
 
-Este desafio teve como objetivo a ingestão de arquivos CSV em um Bucket no `S3`. Essa é a primeira etapa do Desafio Final.
-
-Para isso, foi necessário construir um código Python que foi executado dentro de um conteiner Docker para carregar os dados locais dos arquivos `series.csv` e `movies.csv` para o bucket.
+Esta primeira Sprint teve como objetivo a ingestão de arquivos CSV em um Bucket no `S3`. Para isso, foi necessário construir um código Python que foi executado dentro de um conteiner Docker para carregar os dados locais dos arquivos `series.csv` e `movies.csv` para o bucket.
 
 Clique nos seguintes links para acessar os respectivos códigos e arquivos:
 

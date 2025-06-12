@@ -1,8 +1,8 @@
-# **Sprint 7: Desafio**
+# **Sprint 02: Descrição das etapas**
 
 ## **1. Objetivos**
 
-Este desafio teve como objetivo a obtenção dos dados do TMDB via AWS Lambda, realizando chamadas da API. Esses dados coletados foram upados dentro do S3, no mesmo bucket da etapa anterior. Nesse caso, os arquivos eram JSON. 
+Esta etapa teve como objetivo a obtenção dos dados do TMDB via AWS Lambda, realizando chamadas da API. Esses dados coletados foram upados dentro do S3, no mesmo bucket da etapa anterior. Nesse caso, os arquivos eram JSON. 
 
 Dessa forma, nessa etapa deveríamos complementar os dados dos Filmes e Series carregados anteriormente.
 

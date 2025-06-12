@@ -1,8 +1,8 @@
-# **Sprint 10: Desafio**
+# **Sprint 05: Descrição das etapas**
 
 ## **1. Objetivos**
 
-Este desafio teve como objetivo a conclusão da última entrega do desafio final. Essa entrega consistia na criação de um dashboard utilizando o Amazon QuickSight a partir da fonte de dados contida na camada Refined.
+Esta etapa teve como objetivo a conclusão da última entrega do desafio final. Essa entrega consistia na criação de um dashboard utilizando o Amazon QuickSight a partir da fonte de dados contida na camada Refined.
 
 Clique nos seguintes links para acessar os respectivos arquivos:
 
