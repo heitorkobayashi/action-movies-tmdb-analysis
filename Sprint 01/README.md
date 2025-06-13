@@ -34,7 +34,7 @@ A maior motivação é entender como filmes de ação de menor orçamento podem 
 
 Para começar o desafio, o primeiro passo foi a criação do bucket, como podemos ver nas imagens a seguir:
 
-![imagem_criacaobucket](/Sprint%206/evidencias/01_desafio_criacao_bucket.png)
+![imagem_criacaobucket](https://github.com/heitorkobayashi/action-movies-tmdb-analysis/blob/main/Sprint%2001/evidencias/01_desafio_criacao_bucket.png)
 
 ### **3.2. Criação do script Python**
 
@@ -42,7 +42,7 @@ Agora com o bucket criado, podemos passar para o próximo passo, a criação do 
 
 Na imagem abaixo podemos ver:
 
-![imagem_script1](/Sprint%206/evidencias/05_desafio_script_01.png)
+![imagem_script1](https://github.com/heitorkobayashi/action-movies-tmdb-analysis/blob/main/Sprint%2001/evidencias/05_desafio_script_01.png)
 
 - Importação da biblioteca `boto3` e `datetime`
 - Configuração do Bucket no S3 que tem a função de estruturar os caminhos dos arquivos.
@@ -51,14 +51,14 @@ Na imagem abaixo podemos ver:
 
 Em seguida, temos: 
 
-![imagem_script2](/Sprint%206/evidencias/06_desafio_script_02.png)
+![imagem_script2](https://github.com/heitorkobayashi/action-movies-tmdb-analysis/blob/main/Sprint%2001/evidencias/06_desafio_script_02.png)
 
 - A variável `hoje` utiliza a data atual para criar a estrutura de caminho solicitada no desafio, com o ano, mês e dia em que é realizado o upload. 
 - As credenciais da AWS foram armazenadas em variáveis. Infelizmente obtive problemas de credencial na etapa do Docker, então optei pela utilização das credenciais no próprio código. 
 
 Por fim:
 
-![imagem_script3](/Sprint%206/evidencias/07_desafio_script_03.png)
+![imagem_script3](https://github.com/heitorkobayashi/action-movies-tmdb-analysis/blob/main/Sprint%2001/evidencias/07_desafio_script_03.png)
 
 - Definição de duas funções:
 
@@ -70,7 +70,7 @@ Por fim:
 
 Tendo o script finalizado, bastava a criação do Dockerfile e fazer a execução do container, como podemos ver na imagem abaixo. Você pode conferir o Dockerfile no link descrito na primeira seção deste readme.
 
-![imagem_docker](/Sprint%206/evidencias/04_desafio_terminal_docker.png)
+![imagem_docker](https://github.com/heitorkobayashi/action-movies-tmdb-analysis/blob/main/Sprint%2001/evidencias/04_desafio_terminal_docker.png)
 
 - Além da utilização das credenciais, foi utilizado a flag -v para fazer o mapeamento dos arquivos localmente e indicar o local em que o conteiner irá acessar os arquivos e onde montará esses arquivos.
 
@@ -78,5 +78,5 @@ Tendo o script finalizado, bastava a criação do Dockerfile e fazer a execuçã
 
 Com o upload tendo sucesso, podemos visualizar os arquivos nos caminhos definidos lá no bucket do S3, finalizando a primeira etada do desafio final:
 
-![imagem_bucket_movies](/Sprint%206/evidencias/02_desafio_upload_movies.png)
-![imagem_bucket_series](/Sprint%206/evidencias/03_desafio_upload_series.png)
+![imagem_bucket_movies](https://github.com/heitorkobayashi/action-movies-tmdb-analysis/blob/main/Sprint%2001/evidencias/02_desafio_upload_movies.png)
+![imagem_bucket_series](https://github.com/heitorkobayashi/action-movies-tmdb-analysis/blob/main/Sprint%2001/evidencias/02_desafio_upload_movies.png)
