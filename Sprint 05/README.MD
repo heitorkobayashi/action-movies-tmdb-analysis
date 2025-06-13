@@ -6,9 +6,9 @@ Esta etapa teve como objetivo a conclusão da última entrega do desafio final. 
 
 Clique nos seguintes links para acessar os respectivos arquivos:
 
-- [Dashboard em .PDF](../desafio/entrega_5/heitor.ana_dashboard.pdf)
-- [Dashboard em .PNG](../desafio/entrega_5/heitor.ana_dashboard.png)
-- [Diagrama do modelo dimensional final](../desafio/entrega_5/modelo_dimensional_final.png)
+- [Dashboard em .PDF](https://github.com/heitorkobayashi/action-movies-tmdb-analysis/blob/main/Sprint%2005/entrega_5/heitor.ana_dashboard.pdf)
+- [Dashboard em .PNG](https://github.com/heitorkobayashi/action-movies-tmdb-analysis/blob/main/Sprint%2005/entrega_5/heitor.ana_dashboard.png)
+- [Diagrama do modelo dimensional final](https://github.com/heitorkobayashi/action-movies-tmdb-analysis/blob/main/Sprint%2005/evidencias/00_modelo_dimensional_final.png)
 
 ## **2. Introdução**
 
@@ -22,25 +22,25 @@ Dessa forma, produções independentes ou com baixo orçamento enfrentam muitos 
 
 Nesta nova etapa do desafio foi necessário realizar uma nova modelagem de dados. Infelizmente, com o modelo da sprint anterior, ao levar os dados para o QuickSight, foram encontrados alguns erros que impediam a leitura do dataset. A tabela fato anterior não continham dados importantes e alguns tipos estavam errados. 
 
-Para resolver este problema foi realizado um novo job no Glue. Você pode acessá-lo [clicando aqui](../desafio/entrega_5/job_camada_refined_v2.py). Abaixo é possível observar a definição da nova tabela fato:
+Para resolver este problema foi realizado um novo job no Glue. Você pode acessá-lo [clicando aqui](https://github.com/heitorkobayashi/action-movies-tmdb-analysis/blob/main/Sprint%2005/entrega_5/job_camada_refined_v2.py). Abaixo é possível observar a definição da nova tabela fato:
 
-![imagem_novo_job](../evidencias/13_job_glue.png)
+![imagem_novo_job](https://github.com/heitorkobayashi/action-movies-tmdb-analysis/blob/main/Sprint%2005/evidencias/13_job_glue.png)
 
 - Aqui é possível ver as definições dos tipos de dados com a utilização do `cast`, além da inserção de novas colunas na tabela fato.
 
 O novo modelo dimensional foi elaborado no mesmo formato anterior, _star schema_. Dessa vez, os dados quantitativos e as métricas estão localizadas na tabela fato, permitindo o cruzamento com as demais dimensões, além de serem o principal núcleo desta análise.
 
-![imagem_modelo_dim](../desafio/entrega_5/modelo_dimensional_final.png)
+![imagem_modelo_dim](https://github.com/heitorkobayashi/action-movies-tmdb-analysis/blob/main/Sprint%2005/evidencias/00_modelo_dimensional_final.png)
 
 Era exatamente este problema que foi resolvido. Anteriormente, esses dados não estavam na tabela fato e estavam definidos com o tipo de dado errado, impossibilitando os joins entre as tabelas. Na imagem a seguir podemos ver os joins realizados com sucesso no QuickSight.
 
-![imagem_joins_tabelas](../evidencias/09_joins_tabelas.png)
+![imagem_joins_tabelas](https://github.com/heitorkobayashi/action-movies-tmdb-analysis/blob/main/Sprint%2005/evidencias/09_joins_tabelas.png)
 
 Em seguida, foram criados alguns campos para gerar novos insights, são eles: `faixa_orcamento` e `decadas`. Eles foram determinados da seguinte forma:
 
-![imagem_field_orcamento](../evidencias/11_calculated_field_orcamento.png)
+![imagem_field_orcamento](https://github.com/heitorkobayashi/action-movies-tmdb-analysis/blob/main/Sprint%2005/evidencias/11_calculated_field_orcamento.png)
 
-![imagem_field_decadas](../evidencias/12_calculated_field_decadas.png)
+![imagem_field_decadas](https://github.com/heitorkobayashi/action-movies-tmdb-analysis/blob/main/Sprint%2005/evidencias/12_calculated_field_decadas.png)
 
 Assim, para o campo `faixa_orcamento` foi possível fazer o agrupamento do orçamento a partir das faixas estabelecidas, possibilitando um insight importante que veremos adiante. Para o campo `decadas` foi possível agrupar os anos em decadas, otimizando a visualização dos gráficos. 
 
@@ -48,7 +48,7 @@ Assim, para o campo `faixa_orcamento` foi possível fazer o agrupamento do orça
 
 Este dashboard apresenta uma análise detalhada da relação entre orçamento, popularidade e a qualidade de filmes populares de ação. A partir dos dados organizados e das visualizações obtidas, podemos entender como essas variáveis estão interligadas e assim responder as nossas perguntas. Abaixo é possível visualizar o dashboard completo:
 
-![imagem_dashboard](../evidencias/14_dashboard.png)
+![imagem_dashboard](https://github.com/heitorkobayashi/action-movies-tmdb-analysis/blob/main/Sprint%2005/evidencias/14_dashboard.png)
 
 Na sequência, examinaremos cada detalhe deste dashboard.
 
@@ -56,11 +56,11 @@ Na sequência, examinaremos cada detalhe deste dashboard.
 
 Para começar, estão destacados alguns indicadores chaves (KPIs). Com eles, é possível obter um resumo, facilitando a compreensão das métricas mais importantes. 
 
-![imagem_kpi1](../evidencias/01_kpis_filmes_populares.png)
+![imagem_kpi1](https://github.com/heitorkobayashi/action-movies-tmdb-analysis/blob/main/Sprint%2005/evidencias/01_kpis_filmes_populares.png)
 
 - O filme _Venom: A Última Rodada_ possui a popularidade mais alta, isso mostra como certos filmes ressoam com o público, mesmo sem depender de avaliações de qualidade. O filme que possui o mair orçamento é o _Avatar: O caminho da água_, um filme de alta popularidade e de grande escala.
 
-![imagem_kpi1](../evidencias/02_kpis_filmes_avaliacoes.png)
+![imagem_kpi1](https://github.com/heitorkobayashi/action-movies-tmdb-analysis/blob/main/Sprint%2005/evidencias/02_kpis_filmes_avaliacoes.png)
 
 - O filme com maior avaliação é o _Batman: O cavaleiro das trevas_. Já a pior avaliação fica com o filme _Território Virgem_.
 
@@ -68,7 +68,7 @@ Para começar, estão destacados alguns indicadores chaves (KPIs). Com eles, é 
 
 Para começar a nossa análise, é importante entender como alguns dados se comportam ao longo do tempo. Assim, é fundamental compreendermos como o investimento financeiro em produções de filmes e o retorno financeiro mudaram ao longo das décadas. 
 
-![imagem_gráfico_1](../evidencias/03_evolucao_orcamento_receita_tempo.png)
+![imagem_gráfico_1](https://github.com/heitorkobayashi/action-movies-tmdb-analysis/blob/main/Sprint%2005/evidencias/03_evolucao_orcamento_receita_tempo.png)
 
 - Neste gráfico, podemos entender a escalada dos orçamentos nos filmes de ação, especialmente a partir dos anos 2000. Com uma breve pesquisa podemos entender que com o surgimento de novas tecnologias, como o CGI, possibilitou maiores investimentos em produções de grande porte. 
 
@@ -82,7 +82,7 @@ Outro dado fundamental para a nossa análise é a compreensão da evolução da 
 
 Segundo o próprio site do TMDB, a popularidade é uma métrica bastante importante e é impactada por diversos fatores e tipos de votos, como: número de votos do dia, número de visualizações do dia, número de usuários que marcaram como "favorito", número total de votos, entre outros. 
 
-![imagem_gráfico_2](../evidencias/04_evolucao_popularidade_tempo.png)
+![imagem_gráfico_2](https://github.com/heitorkobayashi/action-movies-tmdb-analysis/blob/main/Sprint%2005/evidencias/04_evolucao_popularidade_tempo.png)
 
 - A partir desse gráfico, podemos entender que existem picos significativos de popularidade de acordo com a década. Na década de 1970, houve um grande crescimento das franquias de ação, sem contar com o advento do marketing global com o passar do tempo.
 
@@ -92,7 +92,7 @@ Segundo o próprio site do TMDB, a popularidade é uma métrica bastante importa
 
 Chegando ao cerne da análise, veremos como o impacto dos orçamentos se desdobram na qualidade dos filmes. Aqui a qualidade será medida a partir das avaliações dos filmes. O gráfico abaixo compara a média de avaliação dos filmes com diferentes faixas de orçamento.
 
-![imagem_gráfico_3](../evidencias/05_media_avaliacoes_orcamento.png)
+![imagem_gráfico_3](https://github.com/heitorkobayashi/action-movies-tmdb-analysis/blob/main/Sprint%2005/evidencias/05_media_avaliacoes_orcamento.png)
 
 - Embora não exista uma diferença exuberante entre as avaliações, o gráfico nos mostra que filmes de baixo e médio orçamento tendem a ter melhores avaliações do que os de orçamento muito alto, acima de $200M. Aqui chegamos a um dos pontos da nossa análise e nos faz questionar o conceito de que mais investimento garante qualidade. Isso é importante para evitar futuros riscos e gastos desnecessários.
 
@@ -100,7 +100,7 @@ Chegando ao cerne da análise, veremos como o impacto dos orçamentos se desdobr
 
 Dando continuidade ao impacto do orçamento, relacionaremos a popularidade dos filmes com as mesmas faixas de orçamento.
 
-![imagem_gráfico_4](../evidencias/06_media_popularidade_orcamento.png)
+![imagem_gráfico_4](https://github.com/heitorkobayashi/action-movies-tmdb-analysis/blob/main/Sprint%2005/evidencias/06_media_popularidade_orcamento.png)
 
 - Na maioria dos casos, os filmes com maior orçamento possuem boa parte do dinheiro destinado à peças publicitárias e produtos de divulgação. Dessa forma, diferente das avaliações, a popularidade é mais alta para filmes de orçamento médio-alto, $100-200M, indicando que um maior investimento nem sempre se traduz em qualidade, mas com certeza pode atrair mais público. 
 
@@ -108,7 +108,7 @@ Dando continuidade ao impacto do orçamento, relacionaremos a popularidade dos f
 
 No cinema existe a percepção comum que trouxemos aqui, de que altos orçamentos resultam em filmes de maior qualidade. É com este gráfico de dispersão que testaremos essa hipótese, explorando a relação entre o orçamento de um filme e a sua avaliação média.
 
-![imagem_gráfico_5](../evidencias/07_correlacao_orcamento_avaliacao.png)
+![imagem_gráfico_5](https://github.com/heitorkobayashi/action-movies-tmdb-analysis/blob/main/Sprint%2005/evidencias/07_correlacao_orcamento_avaliacao.png)
 
 - Com este gráfico podemos evidenciar que não há uma correlação clara entre orçamento alto e boa avaliação. Grande parte dos filmes que possuem uma boa qualidade também são aqueles que possuem baixo a médio orçamentos.
 
@@ -120,7 +120,7 @@ No cinema existe a percepção comum que trouxemos aqui, de que altos orçamento
 
 Para finalizar, é importante trazer um detalhamento granular dos filmes de ação mais bem avaliados e as suas respectivas métricas (avaliações, orçamento, receita, popularidade e votos). Possibilitando uma visão ampla da questão abordada até então.
 
-![imagem_gráfico_6](../evidencias/08_lista_filmes_avaliacoes.png)
+![imagem_gráfico_6](https://github.com/heitorkobayashi/action-movies-tmdb-analysis/blob/main/Sprint%2005/evidencias/08_lista_filmes_avaliacoes.png)
 
 - Com essa tabela, podemos refletir sobre as preferências do público, destacando produções de qualidade reconhecida.
 
